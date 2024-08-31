@@ -1,0 +1,905 @@
+package proj380;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.border.TitledBorder;
+
+import net.proteanit.sql.DbUtils;
+
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+
+public class tes {
+
+	private JFrame frame;
+	private JTextField txtdriverid;
+	private JTextField textedition;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTable table;
+	private JTable scrollPane_3;
+	private JTable table_1;
+	private JTable table_2;
+	private JTextField textField_4;
+	private JTable table_3;
+	private JTable scrollPane_1;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTable table_4;
+	private JTextField textField_8;
+
+	
+	Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    private JTextField textField_9;
+    private JTextField textField_10;
+    private JTextField textField_11;
+    private JTextField textField_12;
+    private JTextField textField_13;
+    private JTextField textField_14;
+    private JTextField textField_15;
+    private JTextField textField_16;
+    private JTextField textField_17;
+    private JTextField textField_18;
+    private JTextField textField_19;
+
+    
+        {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/?user=root", "root","12345");
+            }
+            catch (ClassNotFoundException ex)
+            {
+              ex.printStackTrace();
+            }
+            catch (SQLException ex)
+            {
+                ex.printStackTrace();
+            }
+
+        }
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					tes window = new tes();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public tes() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	
+	public void table_loadcustomer()
+	{
+	 try
+	 {
+	pst = con.prepareStatement("select * from mydb.Customer");
+	rs = pst.executeQuery();
+	table_1.setModel(DbUtils.resultSetToTableModel(rs));
+	}
+	 catch (SQLException e)
+	 {
+	 e.printStackTrace();
+	}
+	}
+	public void table_loadDriver()
+	{
+	 try
+	 {
+	pst = con.prepareStatement("select * from mydb.Driver");
+	rs = pst.executeQuery();
+	table_2.setModel(DbUtils.resultSetToTableModel(rs));
+	}
+	 catch (SQLException e)
+	 {
+	 e.printStackTrace();
+	}
+	}
+	public void table_loadcar()
+	{
+	 try
+	 {
+	pst = con.prepareStatement("select * from mydb.Car");
+	rs = pst.executeQuery();
+	table_3.setModel(DbUtils.resultSetToTableModel(rs));
+	}
+	 catch (SQLException e)
+	 {
+	 e.printStackTrace();
+	}
+	}
+	public void table_loadorder()
+	{
+	 try
+	 {
+	pst = con.prepareStatement("select * from mydb.Order");
+	rs = pst.executeQuery();
+	table.setModel(DbUtils.resultSetToTableModel(rs));
+	}
+	 catch (SQLException e)
+	 {
+	 e.printStackTrace();
+	}
+	}public void table_loadCustomer_has_Order()
+	{
+		 try
+		 {
+		pst = con.prepareStatement("select * from mydb.Customer_has_Order");
+		rs = pst.executeQuery();
+		table_4.setModel(DbUtils.resultSetToTableModel(rs));
+		}
+		 catch (SQLException e)
+		 {
+		 e.printStackTrace();
+		}
+		}
+	private void initialize() {
+		frame = new JFrame();
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Online Delivery");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 29));
+		lblNewLabel.setBounds(408, 10, 244, 60);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Order", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBounds(38, 85, 313, 209);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Driver ID");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(10, 11, 81, 49);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Product");
+		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_2.setBounds(10, 42, 81, 49);
+		panel.add(lblNewLabel_1_2);
+		
+		txtdriverid = new JTextField();
+		txtdriverid.setBounds(125, 27, 138, 19);
+		panel.add(txtdriverid);
+		txtdriverid.setColumns(10);
+		
+		textedition = new JTextField();
+		textedition.setColumns(10);
+		textedition.setBounds(125, 58, 138, 19);
+		panel.add(textedition);
+		
+		JLabel lblNewLabel_1_6 = new JLabel("Order ID Delete");
+		lblNewLabel_1_6.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_6.setBounds(10, 160, 115, 49);
+		panel.add(lblNewLabel_1_6);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(125, 176, 138, 19);
+		panel.add(textField_5);
+		
+		JLabel lblNewLabel_1_2_1 = new JLabel("Price");
+		lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_2_1.setBounds(10, 76, 43, 49);
+		panel.add(lblNewLabel_1_2_1);
+		
+		JLabel lblNewLabel_1_2_2 = new JLabel("Product Quantity");
+		lblNewLabel_1_2_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_2_2.setBounds(10, 113, 138, 49);
+		panel.add(lblNewLabel_1_2_2);
+		
+		textField_17 = new JTextField();
+		textField_17.setColumns(10);
+		textField_17.setBounds(125, 92, 138, 19);
+		panel.add(textField_17);
+		
+		textField_18 = new JTextField();
+		textField_18.setColumns(10);
+		textField_18.setBounds(135, 129, 138, 19);
+		panel.add(textField_18);
+		
+		JButton btnExit = new JButton("Add Order");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {String product,idd,Price,ProductQuantity;
+		    product = textedition.getText();
+		    idd = txtdriverid.getText();
+		    Price = textField_17.getText();
+		    ProductQuantity = textField_18.getText();
+		    try {
+		    pst = con.prepareStatement("insert into mydb.Order(iddriver,Product,Price,ProductQuantity)values(?,?,?,?)");
+		    pst.setInt(1, Integer.parseInt(idd));
+		    pst.setString(2, product);
+		    pst.setString(3, Price);
+		    pst.setString(4, ProductQuantity);
+		    pst.executeUpdate();
+		    JOptionPane.showMessageDialog(null, "Record Addedddd!!!!!");
+		    table_loadorder();
+
+		    textedition.setText("");
+		    txtdriverid.setText("");
+		    textField_17.setText("");
+		    textField_18.setText("");
+		    textedition.requestFocus();
+		       }
+
+		    catch (SQLException e1)
+		            {
+			    JOptionPane.showMessageDialog(null, "There is No Driver!!!");
+
+
+			 //   e1.printStackTrace();
+		    }
+		    catch (Exception e1)
+            {
+	    JOptionPane.showMessageDialog(null, "check your input!!!");}
+			}
+		});
+		btnExit.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnExit.setBounds(20, 304, 140, 60);
+		frame.getContentPane().add(btnExit);
+		
+		JButton btnClear = new JButton("Delete Order");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String bid;
+				bid  = textField_5.getText();
+				try {
+				pst = con.prepareStatement("delete from mydb.Order where OrderNO =?");
+				           pst.setString(1, bid);
+				           pst.executeUpdate();
+				           JOptionPane.showMessageDialog(null, "Record Delete!!!!!");
+				           table_loadorder();
+
+
+
+				           textField_5.requestFocus();
+				}
+
+				           catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Check your Input");
+				           }
+			}
+		});
+		btnClear.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnClear.setBounds(170, 304, 146, 60);
+		frame.getContentPane().add(btnClear);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Customer", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBounds(20, 392, 372, 124);
+		frame.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_1_3 = new JLabel("Customer Name\r\n");
+		lblNewLabel_1_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_3.setBounds(10, 10, 145, 49);
+		panel_1.add(lblNewLabel_1_3);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(165, 27, 138, 19);
+		panel_1.add(textField);
+		
+		JLabel lblNewLabel_2 = new JLabel("Customer Adress:");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_2.setBounds(10, 69, 159, 13);
+		panel_1.add(lblNewLabel_2);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(165, 68, 138, 19);
+		panel_1.add(textField_1);
+		
+		JLabel lblNewLabel_1_6_1 = new JLabel("Customer ID Delete");
+		lblNewLabel_1_6_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_6_1.setBounds(10, 92, 159, 28);
+		panel_1.add(lblNewLabel_1_6_1);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(165, 97, 138, 19);
+		panel_1.add(textField_8);
+		
+		JButton btnUpdate = new JButton("Display Order\r\n");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+		         try
+		         {
+		        pst = con.prepareStatement("select * from mydb.Order ");
+		        rs = pst.executeQuery();
+		        table.setModel(DbUtils.resultSetToTableModel(rs));
+		    }
+		         catch (SQLException e1)
+		         {
+		         e1.printStackTrace();
+		      }
+			}
+		});
+		btnUpdate.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnUpdate.setBounds(326, 304, 169, 60);
+		frame.getContentPane().add(btnUpdate);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Driver", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_2.setBounds(20, 598, 308, 199);
+		frame.getContentPane().add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Driver Name");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_1.setBounds(26, 10, 126, 49);
+		panel_2.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_4 = new JLabel("Car ID");
+		lblNewLabel_1_4.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_4.setBounds(26, 42, 81, 49);
+		panel_2.add(lblNewLabel_1_4);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(138, 27, 138, 19);
+		panel_2.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(138, 59, 138, 19);
+		panel_2.add(textField_3);
+		
+		JLabel lblNewLabel_1_4_1 = new JLabel("Driver ID Delete");
+		lblNewLabel_1_4_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_4_1.setBounds(10, 149, 163, 49);
+		panel_2.add(lblNewLabel_1_4_1);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(138, 165, 138, 19);
+		panel_2.add(textField_9);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Driver Age");
+		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_1_1.setBounds(10, 77, 126, 34);
+		panel_2.add(lblNewLabel_1_1_1);
+		
+		JLabel lblNewLabel_1_1_2 = new JLabel("Driver Nationality");
+		lblNewLabel_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_1_2.setBounds(10, 102, 126, 49);
+		panel_2.add(lblNewLabel_1_1_2);
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBounds(138, 89, 138, 19);
+		panel_2.add(textField_12);
+		
+		textField_13 = new JTextField();
+		textField_13.setColumns(10);
+		textField_13.setBounds(138, 119, 138, 19);
+		panel_2.add(textField_13);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(374, 80, 212, 221);
+		frame.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		JButton btnAddCustomer = new JButton("Add Customer\r\n");
+		btnAddCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String CustomerName,address;
+			    CustomerName = textField.getText();
+			    address = textField_1.getText();
+			    //price = txtprice.getText();
+			    try {
+			    pst = con.prepareStatement("insert into mydb.Customer(CustomerName,address)values(?,?)");
+			    pst.setString(1, CustomerName);
+			    pst.setString(2, address);
+
+			    pst.executeUpdate();
+			    JOptionPane.showMessageDialog(null, "Record Addedddd!!!!!");
+			    table_loadcustomer();
+
+			    textField.setText("");
+			    textField_1.setText("");
+			    textField.requestFocus();
+			       }
+
+			    catch (Exception e1)
+			            {
+			    JOptionPane.showMessageDialog(null, "Check your Input");
+			    }
+			}
+		});
+		btnAddCustomer.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAddCustomer.setBounds(10, 526, 146, 60);
+		frame.getContentPane().add(btnAddCustomer);
+		
+		JButton btnDeleteCustomer = new JButton("Delete Customer ");
+		btnDeleteCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String bid;
+				bid  = textField_8.getText();
+				try {
+				pst = con.prepareStatement("delete from mydb.Customer where idCustomer =?");
+				           pst.setString(1, bid);
+				           pst.executeUpdate();
+				           JOptionPane.showMessageDialog(null, "Record Delete!!!!!");
+				           table_loadcustomer();
+
+
+
+				           textField_8.requestFocus();
+				}
+
+				           catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Check your Input");
+				           }
+				
+			}
+		});
+		btnDeleteCustomer.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnDeleteCustomer.setBounds(166, 526, 169, 60);
+		frame.getContentPane().add(btnDeleteCustomer);
+		
+		JButton btnDisplayCustomer = new JButton("Display Customer");
+		btnDisplayCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				   try
+			         {
+			        pst = con.prepareStatement("select * from mydb.Customer");
+			        rs = pst.executeQuery();
+			        table_1.setModel(DbUtils.resultSetToTableModel(rs));
+			    }
+			         catch (SQLException e1)
+			         {
+			         e1.printStackTrace();
+			      }
+				
+			}
+		});
+		btnDisplayCustomer.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnDisplayCustomer.setBounds(349, 526, 175, 60);
+		frame.getContentPane().add(btnDisplayCustomer);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(520, 354, 202, 171);
+		frame.getContentPane().add(scrollPane_1);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		
+		JButton btnAddDriver = new JButton("Add Driver");
+		btnAddDriver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {String Dname,carid,Age,Nationality;
+		    Dname = textField_2.getText();
+		    carid = textField_3.getText();
+		    Age = textField_12.getText();
+		    Nationality = textField_13.getText();
+		    
+
+		    try {
+		    pst = con.prepareStatement("INSERT INTO mydb.Driver(CarId,DriverName,Age,Nationality)values(?,?,?,?)");
+		    pst.setInt(1, Integer.parseInt(carid));
+		    pst.setString(2, Dname);
+		    pst.setInt(3, Integer.parseInt(Age));
+		    pst.setString(4, Nationality);
+		    pst.executeUpdate();
+		    JOptionPane.showMessageDialog(null, "Record Addedddd!!!!!");
+		    table_loadDriver();
+
+		    textField_2.setText("");
+		    textField_3.setText("");
+		    textField_12.setText("");
+		    textField_13.setText("");
+
+		    textField_2.requestFocus();
+		       }
+
+		    catch (SQLException e1)
+		            {
+		    	JOptionPane.showMessageDialog(null, "There is No Car!!!");
+		   // e1.printStackTrace();
+		    }  catch (Exception e1)
+			            {
+			    	JOptionPane.showMessageDialog(null, "Check your Input");
+			 //   e1.printStackTrace();
+			    }
+                           
+
+			}
+
+			
+		});
+		btnAddDriver.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAddDriver.setBounds(10, 808, 146, 60);
+		frame.getContentPane().add(btnAddDriver);
+		
+		JButton btnDeleteDriver = new JButton("Delete Driver");
+		btnDeleteDriver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String bid;
+				bid  = textField_9.getText();
+				try {
+					pst= con.prepareStatement("update mydb.Order iddriver set iddriver = NULL where iddriver =? ");
+					pst.setString(1, bid);
+					pst.executeUpdate();
+
+
+							} catch (Exception e2) {
+								JOptionPane.showMessageDialog(null, "Check your Input");
+//e2.printStackTrace();
+							}
+				try {
+				pst = con.prepareStatement("delete from mydb.Driver where idDriver =?");
+				pst.setString(1, bid);
+				pst.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Record Delete!!!!!");
+				table_loadDriver();
+
+
+				textField_9.requestFocus();
+				}
+
+				catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Check your Input");
+				}
+			}
+		});
+		btnDeleteDriver.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnDeleteDriver.setBounds(170, 808, 169, 60);
+		frame.getContentPane().add(btnDeleteDriver);
+		
+		JButton btnDisplayDriver = new JButton("Display Driver");
+		btnDisplayDriver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				table_loadDriver();
+			}
+		});
+		btnDisplayDriver.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnDisplayDriver.setBounds(349, 808, 175, 60);
+		frame.getContentPane().add(btnDisplayDriver);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(534, 583, 227, 198);
+		frame.getContentPane().add(scrollPane_2);
+		
+		table_2 = new JTable();
+		scrollPane_2.setViewportView(table_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(null);
+		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Car", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBounds(646, 10, 395, 177);
+		frame.getContentPane().add(panel_3);
+		
+		JLabel lblNewLabel_1_5 = new JLabel("Color");
+		lblNewLabel_1_5.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_5.setBounds(10, 11, 81, 49);
+		panel_3.add(lblNewLabel_1_5);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(59, 27, 138, 19);
+		panel_3.add(textField_4);
+		
+		JLabel lblNewLabel_1_5_2 = new JLabel("Car ID Delete");
+		lblNewLabel_1_5_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_5_2.setBounds(10, 128, 114, 49);
+		panel_3.add(lblNewLabel_1_5_2);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(121, 144, 138, 19);
+		panel_3.add(textField_10);
+		
+		JLabel lblNewLabel_1_5_3 = new JLabel("Milage");
+		lblNewLabel_1_5_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_5_3.setBounds(10, 46, 81, 35);
+		panel_3.add(lblNewLabel_1_5_3);
+		
+		JLabel lblNewLabel_1_5_4 = new JLabel("Model");
+		lblNewLabel_1_5_4.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_5_4.setBounds(10, 81, 81, 27);
+		panel_3.add(lblNewLabel_1_5_4);
+		
+		JLabel lblNewLabel_1_5_5 = new JLabel("Type");
+		lblNewLabel_1_5_5.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_5_5.setBounds(10, 108, 81, 35);
+		panel_3.add(lblNewLabel_1_5_5);
+		
+		textField_14 = new JTextField();
+		textField_14.setColumns(10);
+		textField_14.setBounds(59, 55, 138, 19);
+		panel_3.add(textField_14);
+		
+		textField_15 = new JTextField();
+		textField_15.setColumns(10);
+		textField_15.setBounds(59, 86, 138, 19);
+		panel_3.add(textField_15);
+		
+		textField_16 = new JTextField();
+		textField_16.setColumns(10);
+		textField_16.setBounds(59, 117, 138, 19);
+		panel_3.add(textField_16);
+		
+		JButton btnAddCar = new JButton("Add Car");
+		btnAddCar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String color,Milage,Model,Type;
+			    color = textField_4.getText();
+			    Milage = textField_14.getText();
+			    Model = textField_15.getText();
+			    Type = textField_16.getText();
+			    
+			    
+
+			    try {
+			    pst = con.prepareStatement("insert into mydb.Car(color,milage,Model,Type)values(?,?,?,?)");
+			    pst.setString(1, color);
+			    pst.setString(2, Milage);
+			    pst.setString(3, Model);
+			    pst.setString(4, Type);
+
+			    pst.executeUpdate();
+			    JOptionPane.showMessageDialog(null, "Record Addedddd!!!!!");
+			    table_loadcar();
+
+			    textField_4.setText("");
+			    textField_14.setText("");
+			    textField_15.setText("");
+			    textField_16.setText("");
+
+			    textField_4.requestFocus();
+			       }
+
+			    catch (Exception e1)
+			            {
+			    //e1.printStackTrace();
+			  JOptionPane.showMessageDialog(null, "Check your Input");
+
+			    }
+			}
+		});
+		btnAddCar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAddCar.setBounds(631, 198, 111, 60);
+		frame.getContentPane().add(btnAddCar);
+		
+		JButton btnDeleteCar = new JButton("Delete Car");
+		btnDeleteCar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String bid;
+				bid  = textField_10.getText();
+			 
+				try {
+		pst= con.prepareStatement("update mydb.Driver CarId set CarId = NULL where CarId =? ");
+		pst.setString(1, bid);
+		pst.executeUpdate();
+
+
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+				
+				try {
+				pst = con.prepareStatement("delete from mydb.Car where CarId =?");
+				pst.setString(1, bid);
+				pst.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Record Delete!!!!!");
+				table_loadcar();
+
+
+				textField_10.requestFocus();
+				}catch (Exception e1)
+				 {
+					 JOptionPane.showMessageDialog(null, "Check your input");
+//e1.printStackTrace();
+
+					}
+			}
+		});
+		btnDeleteCar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnDeleteCar.setBounds(755, 198, 135, 60);
+		frame.getContentPane().add(btnDeleteCar);
+		
+		JButton btnDisplayCar = new JButton("Display Car");
+		btnDisplayCar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+					 try
+					 {
+					pst = con.prepareStatement("select * from mydb.Car");
+					rs = pst.executeQuery();
+					table_3.setModel(DbUtils.resultSetToTableModel(rs));
+					}
+					 catch (SQLException e1)
+					 {
+					 e1.printStackTrace();
+					}
+			}
+		});
+		btnDisplayCar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnDisplayCar.setBounds(900, 198, 146, 60);
+		frame.getContentPane().add(btnDisplayCar);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(1109, 67, 193, 225);
+		frame.getContentPane().add(scrollPane_3);
+		
+		table_3 = new JTable();
+		scrollPane_3.setViewportView(table_3);
+		
+		JPanel panel_3_1 = new JPanel();
+		panel_3_1.setLayout(null);
+		panel_3_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Customer's Order", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3_1.setBounds(771, 355, 298, 248);
+		frame.getContentPane().add(panel_3_1);
+		
+		JLabel lblNewLabel_1_5_1 = new JLabel("Customer ID:\r\n");
+		lblNewLabel_1_5_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_5_1.setBounds(10, 25, 98, 49);
+		panel_3_1.add(lblNewLabel_1_5_1);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(129, 41, 138, 19);
+		panel_3_1.add(textField_6);
+		
+		JLabel lblNewLabel_1_5_1_1 = new JLabel("Order Number:");
+		lblNewLabel_1_5_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_5_1_1.setBounds(10, 67, 121, 49);
+		panel_3_1.add(lblNewLabel_1_5_1_1);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(129, 84, 138, 19);
+		panel_3_1.add(textField_7);
+		
+		JLabel lblNewLabel_1_5_2_1 = new JLabel("ID Delete");
+		lblNewLabel_1_5_2_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_5_2_1.setBounds(10, 154, 114, 49);
+		panel_3_1.add(lblNewLabel_1_5_2_1);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(129, 170, 138, 19);
+		panel_3_1.add(textField_11);
+		
+		JLabel lblNewLabel_1_5_1_1_1 = new JLabel("Order Date");
+		lblNewLabel_1_5_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1_5_1_1_1.setBounds(10, 114, 121, 49);
+		panel_3_1.add(lblNewLabel_1_5_1_1_1);
+		
+		textField_19 = new JTextField();
+		textField_19.setColumns(10);
+		textField_19.setBounds(129, 127, 138, 19);
+		panel_3_1.add(textField_19);
+		
+		JButton btnAdd = new JButton("Add ");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String idcustomer,ordernumber,orderDate;
+			    idcustomer = textField_6.getText();
+			    ordernumber = textField_7.getText();
+			    orderDate = textField_19.getText();
+
+			    try {
+			    pst = con.prepareStatement("insert into mydb.Customer_has_Order(idCustomer,OrderNO,Order Date)values(?,?,?)");
+			    pst.setString(1,idcustomer);
+			    pst.setString(2, ordernumber);
+			    pst.setString(3, orderDate);
+			    pst.executeUpdate();
+			    JOptionPane.showMessageDialog(null, "Record Addedddd!!!!!");
+			    table_loadcustomer();
+
+			    textField_6.setText("");
+			    textField_7.setText("");
+			    textField_19.setText("");
+
+			    textField_6.requestFocus();
+			       }
+
+			    catch (SQLException e1)
+			            {
+			    	JOptionPane.showMessageDialog(null, "There is No Customer nor order!!!");
+			 //   e1.printStackTrace();
+			    }
+                           catch (Exception e1)
+			            {
+			    	JOptionPane.showMessageDialog(null, "Check your Input");
+			 //   e1.printStackTrace();
+			    }
+                               
+
+			}
+		});
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAdd.setBounds(786, 614, 81, 60);
+		frame.getContentPane().add(btnAdd);
+		
+		JButton btnDelete = new JButton("Delete ");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String bid;
+				bid  = textField_11.getText();
+				try {
+				pst = con.prepareStatement("delete from mydb.Customer_has_Order where del =?");
+				           pst.setString(1, bid);
+				           pst.executeUpdate();
+				           JOptionPane.showMessageDialog(null, "Record Delete!!!!!");
+				           table_loadcustomer();
+
+
+
+				           textField_11.requestFocus();
+				}
+
+				           catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Check your input");
+				           }
+				
+			}
+		});
+		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnDelete.setBounds(877, 614, 87, 60);
+		frame.getContentPane().add(btnDelete);
+		
+		JButton btnDisplay = new JButton("Display");
+		btnDisplay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				table_loadCustomer_has_Order();
+			}
+		});
+		btnDisplay.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnDisplay.setBounds(974, 614, 95, 60);
+		frame.getContentPane().add(btnDisplay);
+		
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setBounds(1132, 354, 212, 182);
+		frame.getContentPane().add(scrollPane_4);
+		
+		table_4 = new JTable();
+		scrollPane_4.setViewportView(table_4);
+	}
+}
+
+
+
